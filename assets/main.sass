@@ -1,0 +1,176 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8"
+
+// variables
+$base-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+$base-font-size: 15px
+$std-padding: 1rem
+
+$text-color:       #3c2b12
+$bg-color: #f4d33c
+$bg-content-color: #fff5e6
+
+$link-color: #9d7538
+$link-hover-color: #453215
+$link-active-color: #372812
+
+// Width of the content area
+$content-width: 800px
+
+body
+  color: $text-color
+  padding: 0
+  margin: 0
+  font-size: $base-font-size
+  font-family: $base-font-family
+  background-color: $bg-color
+  
+  header
+    white-space: nowrap
+    background: $bg-color url({{ "/assets/blend.png" | relative_url }}) repeat-x
+    border-bottom: 1px solid #ca943e
+
+    h1
+      color: #ca943e
+      margin: 0 auto
+      padding: 0.4rem $std-padding 0.2rem
+      font-size: 240%
+      font-weight: bold
+      display: block
+      font-family: Georgia
+      width: $content-width
+
+      img
+        vertical-align: middle
+
+      a:link, a:hover, a:visited
+        color: #ca943e
+        text-decoration: none
+        font-style: italic
+
+h2
+  margin: 1em 0
+  text-align: left
+  font-size: 120%
+  text-decoration: underline
+
+h3
+  margin: 1em 0
+  text-align: left
+  font-size: 100%
+
+table
+  margin: 0
+
+hr
+  border: 1px solid #E4C228
+
+a:link, a:visited
+  color: $link-color
+  text-decoration: underline
+
+a:hover
+  color: $link-hover-color
+
+ul
+  list-style-image: url(data:image/gif;base64,R0lGODlhBQAFAIABAEUyFf///yH5BAEKAAEALAAAAAAFAAUAAAIHTGCnyJsYCgA7)
+  padding-left: 1.5em
+
+ol
+  list-style-type: lower-latin
+  list-style-image: none
+  padding-left: 1.5em
+
+#header-small
+  color: #af8036
+  font-size: 55%
+  font-weight: 100
+  word-spacing: 0.2em
+  letter-spacing: -0.02em
+
+nav.menu
+  background: #ffe984
+  border-top: 1px solid #e4c228
+  border-bottom: 1px solid #e4c228
+  list-style: none
+  display: block
+  padding: 0.5em 0
+  margin: 0
+  word-spacing: -0.05em
+  
+  .inner
+    width: $content-width
+    margin: 0 auto
+    padding: 0 $std-padding
+    
+    a
+      white-space: nowrap
+      &:link, &:visited
+        color: $link-color
+        margin-left: 0.9em
+        text-decoration: none
+        
+        &:first-child
+          margin-left: 0
+
+      &:hover
+        color: $link-hover-color
+
+      &.active
+        color: $link-active-color
+        margin: 0 0 0.5em 0.9em
+
+main
+  #outer-content
+    background: $bg-content-color url({{ "/assets/content.jpg" | relative_url }}) no-repeat right bottom
+    border-top: 2px solid #f4eabd
+    width: 100%
+
+    #content
+      background: transparent
+      width: $content-width
+      padding: $std-padding
+      margin: 0 auto
+      text-align: justify
+      
+      &::after
+        content: ""
+        display: block
+        clear: both
+
+footer
+  color: #af8036
+  background: $bg-color url({{ "/assets/blend.png" | relative_url }}) repeat-x top
+  
+  .inner
+    padding: 1em 1em 1em
+    margin: 0 auto
+    width: $content-width
+    
+    a
+      text-decoration: none
+      
+      > *
+        vertical-align: middle
+
+.screenshot
+  display: block
+  width: 33%
+  height: 200px
+  float: left
+  text-align: center
+  margin: 1.5rem 0 1.5rem
+
+  .caption
+    margin: 0 0.8rem 0.25rem
+
+.pull-right
+  float: right
+
+.icon
+  display: inline-block
+  margin-right: 4px
+  width: 16px
+  height: 16px

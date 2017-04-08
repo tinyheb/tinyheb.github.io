@@ -1,0 +1,20 @@
+<header class="site-header" role="banner">
+    <h1>
+        <img src="{{ "/assets/flower.png" | relative_url }}" alt="logo"/>
+        <a href="{{ "/" | relative_url}}">{{ site.title | escape }}</a>
+        <span id="header-small">{{ site.description | escape }}</span>
+    </h1>
+</header>
+<nav class="menu">
+    <div class="inner">
+        {% assign sorted_pages = site.pages | sort:"order" %}
+        {% for my_page in sorted_pages %}
+            {% if my_page.title %}
+                <a href="{{ my_page.url | relative_url }}"{% if page.url == my_page.url %} class="active"{% endif %}>{{ my_page.title | escape }}</a>
+            {% endif %}
+        {% endfor %}
+        <a href="https://github.com/{{ site.repository }}" target="_blank" class="pull-right">Github</a>
+        <a href="{{ "/assets/tinyheb-handbuch.pdf" | relative_url }}" target="_blank" class="pull-right">Handbuch</a>
+        <a href="https://lists.launchpad.net/tinouheb/" target="_blank" class="pull-right">Mailingliste</a>
+    </div>
+</nav>

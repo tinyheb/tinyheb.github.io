@@ -1,0 +1,15 @@
+title: tinyheb
+email: your-email@domain.com
+description: Open-Source-Abrechnungssoftware für Hebammen
+baseurl: ""
+url: "https://tinyheb.github.io"
+github_username:  tinyheb
+repository: "tinyheb/tinyheb"
+lang: de
+
+# Build settings
+markdown: kramdown
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor/**/*
