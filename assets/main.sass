@@ -1,5 +1,4 @@
 ---
-# Only the main Sass file needs front matter (the dashes are enough)
 ---
 @charset "utf-8"
 
@@ -7,6 +6,7 @@
 $base-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
 $base-font-size: 15px
 $std-padding: 1rem
+$menu-padding: 0.5rem
 
 $brown: #5a411b
 $choc: #9d7538
@@ -25,6 +25,13 @@ $footer-color: $choc
 
 $content-width: 800px
 $std-duration: 200ms
+$breakpoint: 800px
+
+@mixin clearfix
+  &::after
+    content: ""
+    display: block
+    clear: both
 
 body
   color: $text-color
@@ -33,11 +40,12 @@ body
   font-size: $base-font-size
   font-family: $base-font-family
   background-color: $bg-color
-  
+
   header
     white-space: nowrap
     background: $bg-color url({{ "/assets/blend.png" | relative_url }}) repeat-x
     border-bottom: 1px solid #ca943e
+    width: 100%
 
     h1
       margin: 0 auto
@@ -46,7 +54,7 @@ body
       font-weight: bold
       display: block
       font-family: Georgia
-      width: $content-width
+      max-width: $content-width
 
       #header-small
         color: $choc
@@ -54,6 +62,9 @@ body
         font-weight: 100
         word-spacing: 0.2em
         letter-spacing: -0.02em
+
+        @media (max-width: $breakpoint)
+          display: none
 
       img
         vertical-align: middle
@@ -83,15 +94,15 @@ a
   transition: color $std-duration
 
   &:link, &:visited
-  color: $link-color
-  text-decoration: underline
+    color: $link-color
+    text-decoration: underline
 
   &:hover
     color: $link-hover-color
 
     svg
       stroke: $link-hover-color
-      
+
       path
         fill: $link-hover-color
 
@@ -110,24 +121,26 @@ nav.menu
   border-bottom: 1px solid #e4c228
   list-style: none
   display: block
-  padding: 0.5em 0
   margin: 0
   word-spacing: -0.05em
-  
+
   .inner
-    width: $content-width
+    +clearfix
+    max-width: $content-width
     margin: 0 auto
     padding: 0 $std-padding
-    
+
     a
       white-space: nowrap
+      display: inline-block
+      margin: $menu-padding $menu-padding $menu-padding 0
+      text-decoration: none
+
+      &:last-child
+        margin-right: 0 !important
+
       &:link, &:visited
         color: $link-color
-        margin-left: 0.9em
-        text-decoration: none
-        
-        &:first-child
-          margin-left: 0
 
       &:hover
         color: $link-hover-color
@@ -143,35 +156,30 @@ main
     width: 100%
 
     #content
+      +clearfix
       background: transparent
-      width: $content-width
-      padding: $std-padding 0 $std-padding * 2
+      max-width: $content-width
+      padding: $std-padding $std-padding $std-padding * 2
       margin: 0 auto
-      text-align: justify
-      
-      &::after
-        content: ""
-        display: block
-        clear: both
 
 footer
   color: $footer-color
   background: $bg-color url({{ "/assets/blend.png" | relative_url }}) repeat-x top
-  
+
   .inner
     padding: 1em 1em 1em
     margin: 0 auto
-    width: $content-width
-    
+    max-width: $content-width
+
     a
       text-decoration: none
-      
+
       > *
         vertical-align: middle
-        
+
     .info
       @extend .pull-right
-        
+
       > *
         vertical-align: middle
 
@@ -197,6 +205,6 @@ footer
 
   svg
     stroke: $footer-color
-    
+
     path
       fill: $footer-color

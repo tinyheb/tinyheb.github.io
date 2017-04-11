@@ -14,8 +14,10 @@
                 <a href="{{ my_page.url | relative_url }}"{% if page.url == my_page.url %} class="active"{% endif %}>{{ my_page.title | escape }}</a>
             {% endif %}
         {% endfor %}
-        <a href="https://github.com/{{ site.repository }}" target="_blank" class="pull-right">Github</a>
-        <a href="{{ "/assets/tinyheb-handbuch.pdf" | relative_url }}" target="_blank" class="pull-right">Handbuch</a>
-        <a href="https://lists.launchpad.net/tinouheb/" target="_blank" class="pull-right">Mailingliste</a>
+        <div class="pull-right">
+            <a href="https://github.com/{{ site.repository }}" target="_blank">Github</a>
+            <a href="{{ "/assets/tinyheb-handbuch.pdf" | relative_url }}" target="_blank">Handbuch</a>
+            <a href="https://lists.launchpad.net/tinouheb/" target="_blank">Mailingliste</a>
+        </div>
     </div>
 </nav>
