@@ -8,10 +8,10 @@ $base-font-size: 15px
 $std-padding: 1rem
 $menu-padding: 0.5rem
 
-$brown: #5a411b
-$choc: #9d7538
-$yellow: #f4d33c
-$bright: #fff5e6
+$brown: rgb(90, 65, 27)
+$choc: rgb(157, 117, 56)
+$yellow: rgb(244, 211, 60)
+$bright: rgb(255, 245, 230)
 
 $text-color: $brown
 $bg-color: $yellow
@@ -21,7 +21,8 @@ $link-color: $choc
 $link-hover-color: $brown
 $link-active-color: darken($brown, 12%)
 
-$footer-color: $choc
+$footer-color: $link-hover-color
+$footer-hover-color: darken($link-hover-color, 12%)
 
 $content-width: 800px
 $std-duration: 200ms
@@ -33,6 +34,10 @@ $breakpoint: 800px
     display: block
     clear: both
 
+@mixin bg-gradient
+  $gradient-color: rgb(red($yellow), green($yellow) - 27, blue($yellow))
+  background: linear-gradient(to bottom, $gradient-color 0, $yellow 2rem)
+
 body
   color: $text-color
   padding: 0
@@ -42,9 +47,9 @@ body
   background-color: $bg-color
 
   header
+    +bg-gradient
     white-space: nowrap
-    background: $bg-color url({{ "/assets/blend.png" | relative_url }}) repeat-x
-    border-bottom: 1px solid #ca943e
+    border-bottom: 1px solid lighten($choc, 10%)
     width: 100%
 
     h1
@@ -57,7 +62,7 @@ body
       max-width: $content-width
 
       #header-small
-        color: $choc
+        color: darken($choc, 5%)
         font-size: 55%
         font-weight: 100
         word-spacing: 0.2em
@@ -69,10 +74,14 @@ body
       img
         vertical-align: middle
 
-      a:link, a:hover, a:visited
-        color: $choc
-        text-decoration: none
-        font-style: italic
+      a
+        &:link, &:visited
+          color: darken($choc, 10%)
+          text-decoration: none
+          font-style: italic
+
+        &:hover
+          color: darken($choc, 5%)
 
 h2
   margin: 1.6rem 0 0.6rem
@@ -88,7 +97,7 @@ table
   margin: 0
 
 hr
-  border: 1px solid #e4c228
+  border: 1px solid lighten($text-color, 40%)
 
 a
   transition: color $std-duration
@@ -116,9 +125,10 @@ ol
   padding-left: 1.5em
 
 nav.menu
-  background: #ffe984
-  border-top: 1px solid #e4c228
-  border-bottom: 1px solid #e4c228
+  $border-color: darken($yellow, 13%)
+  background: saturate(lighten($yellow, 15%), 40%)
+  border-top: 1px solid $border-color
+  border-bottom: 1px solid $border-color
   list-style: none
   display: block
   margin: 0
@@ -152,19 +162,23 @@ main
   #outer-content
     background: $bg-content-color url({{ "/assets/content.jpg" | relative_url }}) no-repeat right bottom
     background-attachment: fixed
-    border-top: 2px solid #f4eabd
+    border-top: 2px solid darken($bg-content-color, 6%)
+    border-bottom: 2px solid darken($bg-content-color, 18%)
     width: 100%
 
     #content
       +clearfix
       background: transparent
       max-width: $content-width
-      padding: $std-padding $std-padding $std-padding * 2
+      padding: $std-padding * 2 $std-padding $std-padding * 2
       margin: 0 auto
 
+      > *:first-child
+        margin-top: 0
+
 footer
-  color: $footer-color
-  background: $bg-color url({{ "/assets/blend.png" | relative_url }}) repeat-x top
+  +bg-gradient
+  border-top: 1px solid lighten($choc, 10%)
 
   .inner
     padding: 1em 1em 1em
@@ -172,10 +186,26 @@ footer
     max-width: $content-width
 
     a
+      color: $footer-color
       text-decoration: none
+
+      &:hover
+        color: $footer-hover-color
+
+        svg
+          stroke: $footer-hover-color
+
+          path
+            fill: $footer-hover-color
 
       > *
         vertical-align: middle
+
+    svg
+      stroke: $footer-color
+
+      path
+        fill: $footer-color
 
     .info
       @extend .pull-right
@@ -183,16 +213,27 @@ footer
       > *
         vertical-align: middle
 
-.screenshot
-  display: block
-  width: 33%
-  height: 200px
-  float: left
-  text-align: center
-  margin: 1.5rem 0 1.5rem
+.screenshots
+  display: flex
+  justify-content: space-between
+  flex-direction: row
+  flex-wrap: wrap
+  justify-content: space-around
 
-  .caption
-    margin: 0 0.8rem 0.25rem
+  .screenshot
+    display: block
+    margin: 0.75rem
+
+    &:hover img
+      filter: brightness(0.95)
+
+    img
+      transition: filter $std-duration
+      max-width: 100%
+
+    .caption
+      margin-bottom: 0.8rem
+      width: 220px
 
 .pull-right
   float: right
@@ -202,9 +243,3 @@ footer
   margin-right: 4px
   width: 16px
   height: 16px
-
-  svg
-    stroke: $footer-color
-
-    path
-      fill: $footer-color

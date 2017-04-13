@@ -1,8 +1,6 @@
 {% assign thumb = "/assets/screenshots/thumb___FILENAME__" | replace: "__FILENAME__", include.img %}
 {% assign href = "/assets/screenshots/__FILENAME__" | replace: "__FILENAME__", include.img %}
-<div class="screenshot">
-    <a href="{{ href | relative_url }}">
-        <div class="caption">{{ include.title }}</div>
-        <img src="{{ thumb | relative_url }}" alt="{{ include.title }}">
-    </a>
-</div>
+<a class="screenshot" href="{{ href | relative_url }}">
+    <div class="caption">{{ include.title }}</div>
+    <img src="{{ thumb | relative_url }}" alt="{{ include.title }}">
+</a>
